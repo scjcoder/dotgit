@@ -1,0 +1,21 @@
+[user]
+	name = Sean Johnson
+	email = sean@scj.net
+[push]
+	default = matching
+[branch]
+	autosetuprebase = always
+[color]
+	status = auto
+	branch = auto
+[core]
+	excludesfile = ~/.cvsignore
+	autocrlf = input
+[url "ssh://git@heroku.com/"]
+	insteadOf = https://git.heroku.com/
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
