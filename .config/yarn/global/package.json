@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "create-react-app": "^1.4.0",
+    "vuepress": "^1.0.2"
+  }
+}
