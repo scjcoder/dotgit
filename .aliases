@@ -31,6 +31,8 @@ alias search='mdfind --name'
 alias -s txt=code
 alias -s md=typora
 
+alias fishconf='nvim $HOME/.config/omf/init.fish'
+
 # normal aliases
 alias c='clear'
 alias lls='ls -laFGhk'
