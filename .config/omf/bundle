@@ -1,4 +1,5 @@
 package bass
+package git-flow
 package https://github.com/jhillyerd/plugin-git
 package pj
 package z
