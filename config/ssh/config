@@ -1,0 +1,40 @@
+# Global SSH Configuration
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+    HashKnownHosts yes
+    ControlMaster auto
+    ControlPath ~/.ssh/control/%r@%h:%p
+    ControlPersist 600
+
+# GitHub
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github
+    PreferredAuthentications publickey
+
+# AWS EC2 Example
+Host aws-*
+    User ec2-user
+    IdentityFile ~/.ssh/aws-%h
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+# Development Servers Example
+Host dev
+    HostName dev.example.com
+    User developer
+    IdentityFile ~/.ssh/dev
+    ForwardAgent yes
+
+# Production Servers Example
+Host prod
+    HostName prod.example.com
+    User production
+    IdentityFile ~/.ssh/prod
+    ForwardAgent no
+    PermitLocalCommand no

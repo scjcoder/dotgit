@@ -1,0 +1,29 @@
+# Source all alias files
+for alias_file in $HOME/.dotfiles/shell/aliases/*.sh; do
+    [ -r "$alias_file" ] && source "$alias_file"
+done
+
+# Source all function files
+for function_file in $HOME/.dotfiles/shell/functions/*.sh; do
+    [ -r "$function_file" ] && source "$function_file"
+done
+
+# AWS CLI autocomplete
+complete -C '/usr/local/bin/aws_completer' aws
+
+# Default AWS region
+export AWS_DEFAULT_REGION="us-east-1"
+
+# AWS CLI pagination off by default
+export AWS_PAGER=""
+
+# SSH Agent configuration
+ssh-agent-init() {
+    eval "$(ssh-agent -s)"
+    ssh-add --apple-use-keychain ~/.ssh/keys/* 2>/dev/null
+}
+
+# Initialize SSH agent if not running
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    ssh-agent-init
+fi

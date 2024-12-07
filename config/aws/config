@@ -1,0 +1,24 @@
+[default]
+region = us-east-1
+output = json
+cli_auto_prompt = on
+cli_history = enabled
+cli_pager = 
+
+[profile dev]
+region = us-east-1
+output = json
+
+[profile prod]
+region = us-east-1
+output = json
+mfa_serial = arn:aws:iam::ACCOUNT_ID:mfa/YOUR_USERNAME
+
+# SSO configuration example
+[profile sso]
+sso_start_url = https://YOUR_ORG.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = ACCOUNT_ID
+sso_role_name = ROLE_NAME
+region = us-east-1
+output = json
