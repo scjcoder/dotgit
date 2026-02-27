@@ -1,59 +1,50 @@
-# Taps
-tap "homebrew/bundle"
+# Brewfile — Sean C. Johnson
+# Run: brew bundle --file=Brewfile
 
-# Shell and Terminal
+# ── Shell and Terminal ────────────────────────────────────────────────────────
+brew "fish"              # Modern shell alternative
+brew "neovim"            # Modern vim
+brew "starship"          # Cross-shell prompt
+brew "tmux"              # Terminal multiplexer
+brew "zoxide"            # Smarter cd command
+brew "tree"              # Directory tree listing
 brew "wget"              # File downloader
-brew "wgetpaste"         # Command-line pastebin client
 
-# Development Tools
-brew "cmake"             # Build system
-brew "cmake-docs"        # Documentation for CMake
+# ── Development Tools ─────────────────────────────────────────────────────────
+brew "git"               # Version control
 brew "go"                # Go programming language
-brew "groff"             # Text formatting system
 brew "node"              # Node.js
-brew "portaudio"         # Cross-platform audio I/O library
+brew "python@3.12"       # Python
+brew "terraform"         # Infrastructure as code
+brew "cmake"             # Build system
 
-# Security and Encryption
+# ── Security and Encryption ───────────────────────────────────────────────────
 brew "age"               # Modern encryption tool
+brew "gnupg"             # GPG suite
+brew "pass"              # Password manager
 brew "openssl@3"         # SSL/TLS toolkit
 
-# Cloud and Infrastructure
+# ── Cloud and Infrastructure ──────────────────────────────────────────────────
 brew "awscli"            # AWS CLI
 brew "hugo"              # Static site generator
-brew "ipfs", restart_service: :changed, link: false  # Peer-to-peer hypermedia protocol
 
-# Media and Documentation
+# ── Utilities ─────────────────────────────────────────────────────────────────
+brew "ripgrep"           # Fast grep (used by telescope.nvim)
+brew "fd"                # Fast find (used by telescope.nvim)
 brew "ffmpeg"            # Media processing
-brew "freerdp"           # Remote Desktop Protocol client
+brew "groff"             # Text formatting
+brew "colordiff"         # Colored diff output
 
-# Blockchain and Cryptocurrency
-brew "ethereum"          # Ethereum utilities
-brew "somo"              # Solidity linter
-
-# VS Code Extensions
-vscode "aaron-bond.better-comments"
-vscode "danielsanmedium.dscodegpt"
+# ── VS Code ───────────────────────────────────────────────────────────────────
 vscode "davidanson.vscode-markdownlint"
 vscode "eamodio.gitlens"
-vscode "equinusocio.vsc-community-material-theme"
 vscode "equinusocio.vsc-material-theme"
 vscode "equinusocio.vsc-material-theme-icons"
 vscode "github.vscode-pull-request-github"
-vscode "gitpod.gitpod-desktop"
 vscode "golang.go"
 vscode "hashicorp.terraform"
-vscode "mohsen1.prettify-json"
-vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
-vscode "ms-vscode-remote.remote-wsl"
-vscode "ms-vscode.cpptools"
-vscode "ms-vscode.powershell"
-vscode "mtxr.sqltools"
-vscode "nervtech.mq4"
-vscode "piotrpalarz.vscode-gitignore-generator"
+vscode "ms-python.debugpy"
 vscode "pkief.material-icon-theme"
-vscode "ritwickdey.liveserver"
 vscode "tamasfe.even-better-toml"
-vscode "vosca.vscode-v-analyzer"
-vscode "vscodevim.vim"

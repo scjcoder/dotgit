@@ -1,36 +1,4 @@
-# Personal Config Files #
-# #######################
-.dotgit
-
-
-# Compiled source #
-###################
-*.com
-*.class
-*.o
-*.so
- 
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
- 
-# Logs and databases #
-######################
-*.log
-*.sql
-*.sqlite
- 
-# OS generated files #
-######################
+# ── OS ────────────────────────────────────────────────────────────────────────
 .DS_Store
 .DS_Store?
 ._*
@@ -39,18 +7,85 @@
 ehthumbs.db
 Thumbs.db
 
-# Hakyll generated files #
-##########################
-dist
-cabal-dev
+# ── Shell history ─────────────────────────────────────────────────────────────
+.bash_history
+.zsh_history
+.python_history
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.viminfo
+*.swp
+*.swo
+*~
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# ── Node ──────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.yarn/cache
+.pnp.*
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.env
+
+# ── Ruby / gems ───────────────────────────────────────────────────────────────
+.gem/
+.bundle/
+vendor/bundle/
+
+# ── Terraform ─────────────────────────────────────────────────────────────────
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# ── Secrets / credentials ─────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+credentials
+**/credentials
+
+# ── App caches / ephemeral state ──────────────────────────────────────────────
+.config/configstore/
+.config/yarn/
+.config/gatsby/
+.config/heroku/
+.config/sanity/
+
+# ── Compiled / build artifacts ────────────────────────────────────────────────
+*.com
+*.class
 *.o
-*.hi
-*.chi
-*.chs.h
-.virtualenv
-.hsenv
-.cabal-sandbox/
-cabal.sandbox.config
-cabal.config
+*.so
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.log
+*.sql
+*.sqlite
+dist/
+build/
 _site/
 _cache/

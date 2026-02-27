@@ -1,53 +1,37 @@
-
-### Sean C. Johnson Master Alias File
-### <sean@scj.net>
-### Last Changed: 2020-08-15
+### Sean C. Johnson — Master Alias File
+### sean@scj.net
 #############################################
 
-# Personal vim setup script (outdated)
-alias vimsetup='curl -Lks code.scj.net/vimSetup | sh'
+# Editor
+alias nv='nvim'
+alias vim='nvim'
 
-# Init machine to store dotfiles in git bare repo
-alias dtgit-init='cd $HOME && git clone https://gitlab.com/snippets/2004775.git dotgit-init && cd dotgit-init && /bin/bash ./dotgit-init'
-
-# AWS testing of code commit ssh connetion
-alias code_commit='ssh APKAJGJFPJPMDFJQHAYA@git-codecommit.us-east-1.amazonaws.com'
-
-# TPF PipBox Creation
-alias pipbox_student='cd ~/prod/pipbox_student_live && git clone ssh://git-codecommit.us-west-1.amazonaws.com/v1/repos/pipbox_student_template && cd pipbox_student_template && rm -rf .git && terraform init && terraform validate'
-alias pipbox_member='cd ~/prod/pipbox_member_live && git clone ssh://git-codecommit.us-west-1.amazonaws.com/v1/repos/pipbox_member_template && cd pipbox_member_template && rm -rf .git && terraform init && terraform validate'
-
-# Skel start new bash script
-alias newsh="touch ./new_script.sh && echo -e '#!/bin/bash\n' >> ./new_script.sh && chmod 755 ./new_script.sh"
-
-# Mac search?
-alias search='mdfind --name'
-
-# Git aliases handled with oh-my-xxx plugins
-# (fish) https://github.com/jhillyerd/plugin-git
-# (zsh) https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
-
-# suffix aliases
-alias -s txt=code
-alias -s md=typora
-
-alias fishconf='nvim $HOME/.config/omf/init.fish'
-
-# normal aliases
+# Navigation / listing
 alias c='clear'
 alias lls='ls -laFGhk'
 alias ll='ls -lapFGhk | grep "/" && ls -lapFGhk | grep -v "/"'
-alias nv='nvim'
-alias vim='nvim'
+alias size='du -h -d 1'
+alias most='du -hsx * | sort -rh | head -10'
+
+# Utilities
 alias sha1='openssl sha1'
 alias mkdir='mkdir -pv'
 alias diff='colordiff'
-alias mnt='mount |column -t'
+alias mnt='mount | column -t'
 alias j='jobs -l'
-alias size='du -h -d 1'
 alias wget='wget -c'
-alias connections='sudo lsof -n -P -i +c 15'
-alias top='atop'
+alias search='mdfind --name'
+alias ping='ping -c 5'
+
+# Grep with color
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Process / CPU / memory (macOS-compatible)
+alias psmem='ps auxr | sort -nrk 4 | head -10'
+alias pscpu='ps auxr | sort -nrk 3 | head -10'
+alias connections='lsof -n -P -i +c 15'
 
 # Terraform
 alias tfp='terraform fmt && terraform plan --out=plan.out'
@@ -56,69 +40,9 @@ alias tfap='terraform apply "plan.out"'
 alias tfs='terraform show'
 alias tfv='terraform get -update && terraform validate'
 
-# Unix machines
-# nginx / postfix mail aliases
-#alias ml='cat /var/log/mail.log'
-#alias mls='cat /var/log/mail.log | grep '
-#alias mll='tail -f /var/log/mail.log'
-#alias mlt='tail -200 /var/log/mail.log'
-#alias merr='cat /var/log/error.log'
-#alias mq='mailq'
+# Suffix aliases (zsh only — open these filetypes in editor)
+alias -s txt=nvim
+alias -s md=nvim
 
-# apt-get aliases
-#alias agu='apt-get update'
-#alias agg='apt-get upgrade'
-#alias agd='apt-get dist-upgrade'
-#alias ash='apt-cache search '
-#alias asw='apt-cache show '
-#alias agi='apt-get install '
-#alias agr='apt-get remove '
-#alias agp='apt-get --purge remove '
-#alias sagi='sudo apt-get install'
-#alias sagr='sudo apt-get remove'
-#alias sagp='sudo apt-get --purge remove'
-#alias sagu='sudo apt-get update'
-#alias sagg='sudo apt-get upgrade'
-#alias sagd='sudo apt-get dist-upgrade'
-#alias sagc='sudo apt-get autoclean'
-
-## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-
-# Do not wait interval 1 second, go fast #
-alias ping='ping -c 5'
-
-# show open ports
-alias ports='netstat -tulanp'
-alias firewall='iptlist'
-
-# reboot / halt / poweroff
-alias reboot='sudo /sbin/reboot'
-alias poweroff='sudo /sbin/poweroff'
-alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown -h now'
- 
-## All of our servers eth1 is connected to the Internets via vlan / router etc  ##
-alias dnstop='sudo dnstop -l 5  eth1'
-alias vnstat='sudo vnstat -i eth1'
-alias iftop='sudo iftop -i eth1'
-alias tcpdump='sudo tcpdump -i eth1'
-
-# Disk usage#
-alias usage='du -ch 2> /dev/null |tail -1'
-alias totalusage='df -hl --total | grep total'
-alias partusage='df -hlT --exclude-type=tmpfs --exclude-type=devtmpfs'
-alias most='du -hsx * | sort -rh | head -10'
-
-## Memory 
-alias meminfo='free -m -l -t'
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
- 
-## CPU
-alias pscpu='ps auxf | sort -nr -k 3'
-alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
-alias cpuinfo='lscpu'
-alias dotgit='/usr/bin/git --git-dir=/Users/sean/.dotgit/ --work-tree=/Users/sean'
+# New shell script skeleton
+alias newsh="touch ./new_script.sh && printf '#!/bin/bash\n\n' >> ./new_script.sh && chmod 755 ./new_script.sh"

@@ -1,0 +1,43 @@
+# dotgit repo-level ignores
+
+# Legacy app configs — not worth versioning
+.filezilla/
+.freemind/
+.TheBrain/
+.iterm2/
+.heroku/
+.serverlessrc
+.wget-hsts
+.netrc
+.linphonerc
+.gemrc
+.gem/
+.oh-my-git/
+.oh-my-zsh/
+.bashrc2_old
+.bash_history
+.zsh_history
+.zlogin
+
+# Tool state
+.config/asciinema/
+.config/configstore/
+.config/fish/
+.config/omf/
+.config/gatsby/
+.config/heroku/
+.config/menus/
+.config/sanity/
+.config/yarn/
+.terraform.d/
+
+# VS Code extensions (installed by VS Code itself, not tracked)
+.vscode/extensions/
+
+# Windsurf (submodule handles this)
+.windsurf/
+
+# Profile / obsolete shell files
+.profile
+
+.bashrc
