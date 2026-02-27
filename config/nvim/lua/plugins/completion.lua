@@ -4,11 +4,12 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",   -- LSP completions
-      "hrsh7th/cmp-buffer",     -- buffer word completions
-      "hrsh7th/cmp-path",       -- filesystem path completions
-      "L3MON4D3/LuaSnip",       -- snippet engine
+      "hrsh7th/cmp-nvim-lsp",     -- LSP completions
+      "hrsh7th/cmp-buffer",       -- buffer word completions
+      "hrsh7th/cmp-path",         -- filesystem path completions
+      "L3MON4D3/LuaSnip",         -- snippet engine
       "saadparwaiz1/cmp_luasnip",
+      "crispgm/cmp-beancount",    -- beancount account name completions
     },
     config = function()
       local cmp     = require("cmp")
@@ -38,6 +39,20 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+        }),
+      })
+
+      -- Beancount-specific completion: account names from your journal
+      -- Only active in .bean, .beancount, and .journal files
+      cmp.setup.filetype({ "beancount", "journal" }, {
+        sources = cmp.config.sources({
+          {
+            name    = "beancount",
+            option  = { account = vim.fn.expand("~/finance/main.journal") },
+          },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
         }),
       })
     end,
