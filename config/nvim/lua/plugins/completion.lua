@@ -42,13 +42,13 @@ return {
         }),
       })
 
-      -- Beancount-specific completion: account names from your journal
-      -- Only active in .bean, .beancount, and .journal files
-      cmp.setup.filetype({ "beancount", "journal" }, {
+      -- Beancount-specific completion: account names from your ledger
+      -- Active in .beancount and .bean files
+      cmp.setup.filetype({ "beancount" }, {
         sources = cmp.config.sources({
           {
-            name    = "beancount",
-            option  = { account = vim.fn.expand("~/finance/main.journal") },
+            name   = "beancount",
+            option = { account = vim.fn.expand("~/.finance/main.beancount") },
           },
           { name = "nvim_lsp" },
           { name = "luasnip" },
