@@ -46,7 +46,7 @@ create_symlink() {
     if [ ! -e "$source" ]; then
         error "Source file $source does not exist"
         return 1
-    }
+    fi
     
     # If target already exists and is a symlink
     if [ -L "$target" ]; then
@@ -175,12 +175,12 @@ main() {
     
     # Check if we made any backups
     if [ -n "$(ls -A "$BACKUP_DIR" 2>/dev/null)" ]; then
-        success "Installation complete! 🎉"
+        success "Installation complete! "
         warn "Existing configs were backed up to: $BACKUP_DIR"
         info "Review the backups and delete them if you don't need them:"
         info "  rm -rf $BACKUP_DIR"
     else
-        success "Installation complete! 🎉"
+        success "Installation complete! "
         rmdir "$BACKUP_DIR"
     fi
     

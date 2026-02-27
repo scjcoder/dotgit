@@ -1,0 +1,112 @@
+# <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+#
+# COMMIT MESSAGE REQUIREMENTS:
+# 1. ALL commit messages MUST be detailed and verbose
+# 2. Subject line should be clear but concise (max 72 chars)
+# 3. Body MUST include comprehensive details:
+#    - What changes were made (detailed list)
+#    - Why changes were made (motivation)
+#    - How it affects the system
+#    - Any potential side effects
+# 4. Use multiple paragraphs and bullet points for clarity
+# 5. Include examples or context where relevant
+# 6. Reference related commits, issues, or documentation
+#
+# Types:
+#   feat     (new feature)
+#   fix      (bug fix)
+#   docs     (documentation changes)
+#   style    (formatting, missing semicolons, etc; no code change)
+#   refactor (refactoring production code)
+#   test     (adding missing tests, refactoring tests)
+#   chore    (updating grunt tasks etc; no production code change)
+#   content  (adding or updating content like recipes, images, etc)
+#
+# Scopes:
+#   recipes  (recipe-related changes)
+#   i18n     (internationalization/translations)
+#   auth     (authentication)
+#   ui       (user interface)
+#   api      (API changes)
+#   infra    (infrastructure)
+#   deps     (dependencies)
+#   ci       (continuous integration)
+#   *        (multiple scopes)
+#
+# Subject should:
+#   * use imperative, present tense: "change" not "changed" nor "changes"
+#   * don't capitalize first letter
+#   * no dot (.) at the end
+#   * be clear and descriptive
+#
+# Body MUST:
+#   * be detailed and comprehensive
+#   * include motivation for the change
+#   * contrast this with previous behavior
+#   * explain technical details where relevant
+#   * list all significant changes
+#   * mention any related changes or dependencies
+#
+# Footer should:
+#   * reference GitHub/GitLab issues
+#   * breaking changes start with BREAKING CHANGE:
+#   * mention any follow-up work needed
+#
+# Examples:
+#   feat(recipes): add comprehensive Thai cuisine collection
+#   
+#   Add 16 authentic Thai recipes across different categories including soups,
+#   curries, stir-fries, salads, and desserts. Each recipe includes:
+#   
+#   - Detailed ingredients with measurements
+#   - Step-by-step cooking instructions
+#   - Cultural notes and serving suggestions
+#   - Spanish translations for all content
+#   - Nutritional information
+#   - Tips for perfect results
+#   - Common variations
+#   
+#   Technical changes:
+#   - Updated recipe schema to support new fields
+#   - Enhanced frontmatter handling for translations
+#   - Added new recipe categories
+#   - Implemented proper YAML formatting
+#   
+#   Related changes:
+#   - Updated recipe index
+#   - Added new recipe tags
+#   - Enhanced search functionality
+#   
+#   Testing:
+#   - Verified all recipes compile correctly
+#   - Checked translations accuracy
+#   - Validated nutritional calculations
+#   
+#   Closes #123, Related to #456
+#
+#   content(recipes): add detailed Pad Thai recipe with comprehensive instructions
+#   
+#   Create new Pad Thai recipe with extensive details including:
+#   
+#   Recipe components:
+#   - Authentic ingredient list with substitutions
+#   - Detailed prep and cooking instructions
+#   - Step-by-step photos
+#   - Traditional cooking techniques
+#   - Common pitfalls and solutions
+#   
+#   Documentation:
+#   - Added cultural context
+#   - Included serving suggestions
+#   - Added wine pairing recommendations
+#   
+#   Technical aspects:
+#   - Enhanced recipe schema
+#   - Added new ingredient tags
+#   - Updated search index
+#   
+#   Part of Thai cuisine collection #789
