@@ -48,7 +48,7 @@ return {
         sources = cmp.config.sources({
           {
             name   = "beancount",
-            option = { account = vim.fn.expand("~/.finance/main.beancount") },
+            option = { account = vim.fn.expand("~/beancount/main.beancount") },
           },
           { name = "nvim_lsp" },
           { name = "luasnip" },

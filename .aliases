@@ -46,3 +46,8 @@ alias -s md=nvim
 
 # New shell script skeleton
 alias newsh="touch ./new_script.sh && printf '#!/bin/bash\n\n' >> ./new_script.sh && chmod 755 ./new_script.sh"
+
+# Beancount / Fava
+alias bean='cd ~/beancount'
+alias bcheck='bean-check ~/beancount/main.beancount'
+alias fava='fava ~/beancount/main.beancount'
