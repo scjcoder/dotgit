@@ -7,6 +7,17 @@
         "serve"
       ],
       "type": "stdio"
+    },
+    "gitlab": {
+      "command": "uvx",
+      "args": [
+        "mcp-gitlab"
+      ],
+      "type": "stdio",
+      "env": {
+        "GITLAB_TOKEN": "${GITLAB_TOKEN}",
+        "GITLAB_URL": "https://gitlab.com"
+      }
     }
   }
 }
