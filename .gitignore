@@ -35,7 +35,6 @@
 .vscode/extensions/
 
 # Windsurf (submodule handles this)
-.windsurf/
 
 # Profile / obsolete shell files
 .profile
