@@ -1,0 +1,9 @@
+{
+  "access_token": "${ROLLBAR_ACCESS_TOKEN}",
+  "environment": "${ROLLBAR_ENVIRONMENT:-production}",
+  "revision": "${GIT_COMMIT_SHA}",
+  "comment": "Deployment via git push",
+  "status": "succeeded",
+  "rollbar_username": "${GIT_USERNAME}",
+  "local_username": "${LOCAL_USERNAME}"
+}

@@ -1,0 +1,22 @@
+# Safety policy file - version 3.0
+security:
+  ignore-cvss-severity-below: 7.0 # Only report high and critical vulnerabilities
+  ignore-vulnerabilities:
+    # Common vulnerabilities that may need to be ignored in development environments
+    # Uncomment and adjust as needed for your project
+
+    # 75180:  # pip < 25.0 vulnerability
+    #   reason: >
+    #     This vulnerability is in the CI environment's pip version.
+    #     We're addressing this by updating pip in the CI configuration.
+    #   expires: 2025-12-31  # Set expiration to ensure we address this
+
+    # 51499:  # CVE-2022-40898: wheel < 0.38.1
+    #   reason: >
+    #     This vulnerability is in a build-time dependency.
+    #     We'll update this in the next dependency update cycle.
+    #   expires: 2025-12-31
+
+  ignore-packages:
+    # Add any packages to ignore here
+    # Example: django

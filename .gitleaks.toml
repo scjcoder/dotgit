@@ -1,0 +1,37 @@
+# Gitleaks configuration for detecting secrets in commits
+
+[extend]
+# use default config from gitleaks
+default = true
+
+[[rules]]
+id = "aws-access-key-id"
+description = "AWS Access Key ID"
+regex = '''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+id = "aws-secret-access-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)aws(.{0,20})?(?-i)['\"][0-9a-zA-Z\/+]{40}['\"]'''
+tags = ["key", "AWS"]
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(api_key|apikey|secret_key|secretkey|private_key|privatekey|auth_token|access_token)(.{0,20})?['\"][0-9a-zA-Z_\-]{16,64}['\"]'''
+tags = ["key", "API"]
+
+[allowlist]
+description = "Allowlisted files and paths"
+paths = [
+  '''\.git/''',
+  '''node_modules/''',
+  '''\.terraform/''',
+  '''terraform/\.terraform/''',
+  '''\.hooks-venv/''',
+  '''\.project-config/''',
+]
+commits = []
+regexes = []
+stopwords = []

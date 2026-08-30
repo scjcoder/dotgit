@@ -1,0 +1,204 @@
+# Standardized pre-commit configuration for all projects
+# This configuration replicates and enhances the functionality of existing custom git hooks
+repos:
+  # Python formatting with black
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--safe, --config=pyproject.toml]
+        exclude: '^archive/'
+
+  # Python linting with flake8
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-docstrings, flake8-bugbear, flake8-comprehensions, flake8-isort]
+        args: [--config=.flake8]
+        exclude: '^archive/'
+
+  # Python security scanning with bandit
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.9
+    hooks:
+      - id: bandit
+        args: ['-r', '-ll'] # Show only low severity and above
+        # Don't fail the commit, just report issues
+        stages: [pre-commit]
+        exclude: '^archive/'
+
+  # Python import sorting with isort
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--settings-path=.isort.cfg]
+        exclude: '^archive/'
+
+  # YAML formatting with prettier
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        types: [yaml, javascript, jsx, json, css, markdown]
+        args: [--write, --config=.prettierrc]
+        exclude: '^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/|^archive/'
+
+  # Terraform formatting and validation
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.96.1
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate # Basic syntax validation
+      - id: terraform_docs # Generate/update Terraform docs
+        args: [--hook-config=--create-file-if-not-exist]
+      - id: terraform_tflint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+      - id: terraform_checkov # Security scanning for Terraform
+        args:
+          - --args=--quiet
+          - --args=--skip-check CKV_AWS_1 # Example of skipping a specific check
+
+  # Detect secrets and sensitive files
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+        args: ['--config=.gitleaks.toml', '--verbose', '--staged']
+        # Only check staged files to prevent false positives in the entire repo
+
+  # General git checks with auto-fixing enabled
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Code style and formatting
+      - id: trailing-whitespace # Fixes trailing whitespace
+        args: [--markdown-linebreak-ext=md]
+        stages: [pre-commit, pre-merge-commit, pre-push]
+        fail_fast: false
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+      - id: end-of-file-fixer # Ensures files end with newline
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+      - id: mixed-line-ending # Fixes line endings
+        args: [--fix=lf] # Convert all line endings to LF
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+
+      # File validation
+      - id: check-yaml # Validates YAML files
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+      - id: check-json # Validates JSON files
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+      - id: check-toml # Validates TOML files
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+      - id: check-xml # Validates XML files
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+      - id: check-added-large-files # Prevents large files (>5MB by default)
+        exclude: '^src/utils/backups/.*$|^backups/.*$|^.*backup.*$|^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/'
+
+      # Security checks
+      - id: detect-private-key # Detects private keys
+      - id: detect-aws-credentials # Detects AWS credentials
+        args: [--allow-missing-credentials] # Skip if no credentials found
+
+      # General code quality
+      - id: check-merge-conflict # Detects merge conflict strings
+      - id: check-case-conflict # Checks for case conflicts in filenames
+
+  # TypeScript/JavaScript linting with ESLint (optional — skipped if no ESLint config)
+  - repo: local
+    hooks:
+      - id: eslint
+        name: ESLint
+        entry: .project-config/tools/git-setup/hooks/custom-hooks/eslint-optional.sh
+        language: system
+        types: [file]
+        files: \.(js|ts|jsx|tsx|astro)$
+        pass_filenames: true
+        exclude: ^node_modules/|^\.git/|^dist/|^build/|^\.astro/|^reports/|^\.terraform/|^terraform/.terraform/
+
+  # GitLab CI configuration linting
+  - repo: local
+    hooks:
+      - id: glab-ci-lint-main
+        name: ✅ GitLab CI Lint (.gitlab-ci.yml)
+        entry: |
+          if ! command -v glab >/dev/null 2>&1; then
+            echo "glab command not found, skipping CI lint"
+            exit 0
+          fi
+          if ! git remote get-url origin 2>/dev/null | grep -q "gitlab"; then
+            echo "Not a GitLab project, skipping CI lint"
+            exit 0
+          fi
+          target_file=".gitlab-ci.yml"
+          if [ ! -f "$target_file" ]; then
+            echo "⏭️  Skipping $target_file (file not found)"
+            exit 0
+          fi
+          echo "Validating GitLab CI configuration: $target_file"
+          if ! glab ci lint "$target_file"; then
+            echo "GitLab CI lint failed for: $target_file"
+            exit 1
+          fi
+          echo "✅ GitLab CI lint passed for: $target_file"
+        language: system
+        stages: [pre-commit]
+        files: '^\.gitlab-ci\.yml$'
+        pass_filenames: false
+
+      - id: glab-ci-lint-production
+        name: ✅ GitLab CI Lint (.gitlab-ci-production.yml)
+        entry: |
+          if ! command -v glab >/dev/null 2>&1; then
+            echo "glab command not found, skipping CI lint"
+            exit 0
+          fi
+          if ! git remote get-url origin 2>/dev/null | grep -q "gitlab"; then
+            echo "Not a GitLab project, skipping CI lint"
+            exit 0
+          fi
+          target_file=".gitlab-ci-production.yml"
+          if [ ! -f "$target_file" ]; then
+            echo "⏭️  Skipping $target_file (file not found)"
+            exit 0
+          fi
+          echo "Validating GitLab CI configuration: $target_file"
+          if ! glab ci lint "$target_file"; then
+            echo "GitLab CI lint failed for: $target_file"
+            exit 1
+          fi
+          echo "✅ GitLab CI lint passed for: $target_file"
+        language: system
+        stages: [pre-commit]
+        files: '^\.gitlab-ci-production\.yml$'
+        pass_filenames: false
+
+      - id: glab-ci-lint-development
+        name: ✅ GitLab CI Lint (.gitlab-ci-development.yml)
+        entry: |
+          if ! command -v glab >/dev/null 2>&1; then
+            echo "glab command not found, skipping CI lint"
+            exit 0
+          fi
+          if ! git remote get-url origin 2>/dev/null | grep -q "gitlab"; then
+            echo "Not a GitLab project, skipping CI lint"
+            exit 0
+          fi
+          target_file=".gitlab-ci-development.yml"
+          if [ ! -f "$target_file" ]; then
+            echo "⏭️  Skipping $target_file (file not found)"
+            exit 0
+          fi
+          echo "Validating GitLab CI configuration: $target_file"
+          if ! glab ci lint "$target_file"; then
+            echo "GitLab CI lint failed for: $target_file"
+            exit 1
+          fi
+          echo "✅ GitLab CI lint passed for: $target_file"
+        language: system
+        stages: [pre-commit]
+        files: '^\.gitlab-ci-development\.yml$'
+        pass_filenames: false
